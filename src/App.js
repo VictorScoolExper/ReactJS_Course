@@ -1,47 +1,48 @@
-import { useState } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  // createRoutesFromElements,
+  // Route,
+} from "react-router-dom";
 
-import Expenses from "./components/Expenses/Expenses";
-import NewExpense from "./components/NewExpense/NewExpense";
+import HomePage from "./pages/Home";
+import ProductsPage from "./pages/Products";
+import RootLayout from "./pages/Root";
+import ErrorPage from "./pages/Error";
 
-const DUMMY_EXPENSE = [
+// alternative way to implement react_router
+// const routeDefinitions = createRoutesFromElements(
+//   <Route>
+//     <Route path="/" element={<HomePage />} />
+//     <Route path="/products" element={<ProductsPage />} />
+//   </Route>
+// );
+// const router = createBrowserRouter(routeDefinitions);
+// end of alternative method
+
+
+const router = createBrowserRouter([
+  // try to create many routes with there wrapper
   {
-    id: 'e1',
-    title: 'Toilet Paper',
-    amount: 94.12,
-    date: new Date(2020, 7, 14),
+    path: "/",
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/products", element: <ProductsPage /> },
+    ],
   },
-  { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
-  {
-    id: 'e3',
-    title: 'Car Insurance',
-    amount: 294.67,
-    date: new Date(2021, 2, 28),
-  },
-  {
-    id: 'e4',
-    title: 'New Desk (Wooden)',
-    amount: 450,
-    date: new Date(2021, 5, 12),
-  },
-];
+  // Here we can add different roots or route dependent wrappers
+  // {
+  //   path: '/admin',
+  //   children: [
+
+  //   ]
+  // }
+]);
 
 function App() {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSE)
-
-  const addExpenseHandler = expense =>{
-    //The "..." is a spread operator to copy the rest of the info in this case
-    setExpenses(prevExpenses=>{
-      return [expense, ...prevExpenses]
-    })
-  };
-
-  return (
-    <div>
-      <NewExpense onAddExpense={addExpenseHandler}/>
-      
-      <Expenses items={expenses}/>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
