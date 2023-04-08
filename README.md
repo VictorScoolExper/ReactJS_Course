@@ -1,5 +1,8 @@
 # ReactJS_Course
 ## Description
-This repo contains all the projects created in the course of the React - The Complete Guide by Maximilian Scharzmuller on Udemy. 
-## Where to find files
-Check in the branches to find the all the projects
+This is from the section 03-basic react 
+## To Run Project
+- Download files
+- Extract Files
+- run "npn install"
+- then run "npm start run"
