@@ -1,8 +1,8 @@
-# ReactJS_Course
-## Description
-This is from the section 03-basic react 
-## To Run Project
+# 04-react-state-&-events
+This section is from the udemy course
+
+## How to use:
 - Download files
-- Extract Files
-- run "npn install"
-- then run "npm start run"
+- Unzip files
+- Run "npm run start'
+
