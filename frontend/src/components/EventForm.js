@@ -1,15 +1,25 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form, useNavigation } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
 function EventForm({ method, event }) {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === 'submitting';
+
   function cancelHandler() {
     // navigate('..');
   }
 
   return (
-    <form className={classes.form}>
+    // this wil send it ot the action
+    <Form
+      method="post"
+      // Trigger action on a specific path or the line below makes it accessable to other paths
+      // action="/any-other-path"
+      className={classes.form}
+    >
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -42,15 +52,21 @@ function EventForm({ method, event }) {
       </p>
       <p>
         <label htmlFor="description">Description</label>
-        <textarea id="description" name="description" rows="5" required defaultValue={event ? event.description : ''}/>
+        <textarea
+          id="description"
+          name="description"
+          rows="5"
+          required
+          defaultValue={event ? event.description : ""}
+        />
       </p>
       <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
+        <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
         </button>
-        <button>Save</button>
+        <button disabled={isSubmitting} >{isSubmitting ? 'Submitting...' : "Save"}</button>
       </div>
-    </form>
+    </Form>
   );
 }
 
