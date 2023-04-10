@@ -1,25 +1,33 @@
-import { useLoaderData, json } from "react-router-dom";
+import { useLoaderData, json, defer, Await } from "react-router-dom";
 
 import EventsList from "../components/EventsList";
+import { Suspense } from "react";
 
 function EventsPage() {
   // retrieves data sent from loader
-  const data = useLoaderData();
+  // const data = useLoaderData();
+  // //  Method 1: handle error
+  // //   if(data.isError){
+  // //     return <p>{data.message}</p>
+  // //   }
+  // const events = data.events;
 
-  //  Method 1: handle error
-  //   if(data.isError){
-  //     return <p>{data.message}</p>
-  //   }
+  const { events } = useLoaderData();
 
-  const events = data.events;
-
-  return <EventsList events={events} />;
+  return (
+    //  <EventsList events={events} />
+    // "Suspense" can be used as a fall back while waiting for data to arrive
+    <Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+      <Await resolve={events}>
+        {(loadedEvents) => <EventsList events={loadedEvents} />}
+      </Await>
+    </Suspense>
+  );
 }
 
 export default EventsPage;
 
-// this function is here for best practices
-export async function loader() {
+async function loadEvents() {
   // use any JS code here, reactjs is not allowed
   const response = await fetch("http://localhost:8080/events");
 
@@ -36,6 +44,18 @@ export async function loader() {
     // const res = new Response('any data', {status: 201});
     // return res;
     // Method 2
-    return response;
+    // return response;
+
+    const resData = await response.json();
+    return resData.events;
   }
+}
+
+// this function is here for best practices
+export function loader() {
+  // defers must always be used with promises
+  return defer({
+    // "events" is a key
+    events: loadEvents(),
+  });
 }
