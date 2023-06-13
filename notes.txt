@@ -1,7 +1,0 @@
-this section is about api handling and controlling react components.
-
-useEffect are sideEffects
-useEffect: takes in a function and dependencies, if a dependency is changed it triggers the function to execute again.
-
-useReducer: is used for more complex state.
-Understanding useReducer, th

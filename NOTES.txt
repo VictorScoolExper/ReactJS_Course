@@ -1,0 +1,29 @@
+this section is about api handling and controlling react components.
+
+useEffect are sideEffects
+useEffect: takes in a function and dependencies, if a dependency is changed it triggers the function to execute again.
+
+useReducer: is used for more complex state.
+Understanding useReducer,
+
+
+useState vs useReducer
+- Generally you will know when to use useReducer(), this is when useState becomes cumbersome or you're getting 
+a lot of bugs/unintended behaviors.
+- useState, is great for independent pieces of state/data, great if state updates are easy and limited to a few 
+kinds of updates
+- useReducer, is great if you need "more power" like handling objects. You should consider it if you have related pieces 
+of state/data. Can be helpful if you have more complex state updates.
+
+
+Context Limitations
+- React Context is NOT OPTIMIZED for high frequency changes!
+- Redux is made for high frequency changes...
+
+Rules of Hooks:
+- Only call React Hooks in React Functions
+    - either : React Component Functions or Custom Hooks
+- Only call React Hooks at the Top Level
+    - Don't call them in nested functions
+    - Don't call them in any block statements
+- useEffect(): ALWAYS add everything you refer to inside of useEffect() as a dependency.
