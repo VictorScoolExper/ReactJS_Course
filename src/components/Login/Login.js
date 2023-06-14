@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React, { useState, useEffect, useReducer, useContext, useRef } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -46,6 +46,10 @@ const Login = (props) => {
   });
 
   const authCtx = useContext(AuthContext);
+  // video 160
+  // we create references to our inputs
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
   // NOTE: renders after every component render cycle when no array is added
   useEffect(() => {
@@ -123,12 +127,16 @@ const Login = (props) => {
     event.preventDefault();
     // We take our saved states
     // authCtx.onLogin(emailState.value, passwordState.value);
+
+    // from video 160
+    // is form valid?
     if(formIsValid){
       authCtx.onLogin(emailState.value, passwordState.value);
     } else if(!emailIsValid) {
-
+      // we call our activate function from input that is exported as focus
+      emailInputRef.current.focus();
     } else {
-
+      passwordInputRef.current.focus();
     }
     
   };
@@ -166,6 +174,7 @@ const Login = (props) => {
           />
         </div> */}
         <Input
+          ref={emailInputRef}
           id="email"
           label="E-Mail"
           type="email"
@@ -175,6 +184,7 @@ const Login = (props) => {
           onBlur={validateEmailHandler}
         />
         <Input
+          ref={passwordInputRef}
           id="password"
           label="Password"
           type="password"
