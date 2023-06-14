@@ -1,31 +1,5 @@
-JSX Limitations
-
-You can't return more than one "root" JSX element (you also can't store more than one "root" JSX element in a variable)
-The solution is to ALWAYS WRAP adjacent elements.
-NOTE: that it does not have to be a div.
-We can return an array of jsx elements but it requires components to have keys.
-
-The problem with using div is creating "<div> Soup"
-In bigger apps you can easily end up with TONS OR UNNECESARY <div>s (or other elements) which
-add NO SEMANTIC MEANING OR STRUCTURE to the page but ARE ONLY THERE BECAUSE OF REACT's/JSX REQUIREMENT
-Fragment is also an alternative
-
-Understanding React Portals:
-For certain situations the way react renders the element to the dom.
-For example:
-SEMANTICALLY and from a "clean HTML structure" perspective, having this nested modal isn't ideal. It is an 
-OVERLAY TO THE ENTIRE PAGE after all (that's similiar for side-drawers, other dialogs etc.)
-
-Understanding Refs:
-lets us access dom components.
-
-In React there exist CONTROLLED OR UNCONTROLLED components. The uncontrolled are reactjs driven components while controlled are 
-thos components where we use ref to access the dom directly
-
-files affected:
-- Helpers/Wrapper.js
-- Users/AddUser.js
-- UI/ErrorModal.js
-- public/index.html
-- Users/AddUser.js
-
+What are CUSTOM HOOKS?
+They are just regular function with stateful logic.
+In short terms:
+- Outsource stateful logic into re-usable functions
+- Unlike regular function, custom hooks can use other React hooks and React state.
