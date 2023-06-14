@@ -1,51 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { Fragment, useState } from 'react';
 
-import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
-import MainHeader from "./components/MainHeader/MainHeader";
-import AuthContext from "./store/auth-context";
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
 
 function App() {
-  const ctx = useContext(AuthContext);
+  const [usersList, setUsersList] = useState([]);
 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // since we have no dependencies the code will only run once
-  // useEffect(() => {
-  //   const storedUserLoggedInInformation = localStorage.getItem("isLoggedIn");
-
-  //   if (storedUserLoggedInInformation === "1") {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, []);
-
-  // const loginHandler = (email, password) => {
-  //   // We should of course check email and password
-  //   // But it's just a dummy/ demo anyways
-  //   localStorage.setItem("isLoggedIn", "1");
-  //   setIsLoggedIn(true);
-  // };
-
-  // const logoutHandler = () => {
-  //   localStorage.removeItem("isLoggedIn");
-  //   setIsLoggedIn(false);
-  // };
+  const addUserHandler = (uName, uAge) => {
+    setUsersList((prevUsersList) => {
+      return [
+        ...prevUsersList,
+        { name: uName, age: uAge, id: Math.random().toString() },
+      ];
+    });
+  };
 
   return (
-    <React.Fragment>
-    {/* <AuthContext.Provider
-      value={{
-        isLoggedIn: isLoggedIn,
-        onLogout: logoutHandler
-      }}
-    > */}
-      <MainHeader onLogout={ctx.logoutHandler} />
-      <main>
-        {!ctx.isLoggedIn && <Login />}
-        {ctx.isLoggedIn && <Home />}
-      </main>
-    {/* </AuthContext.Provider> */}
-     </React.Fragment>
+    // the Fragment is an alternative to the Wrapper component we add in our Helpers directory
+    <Fragment>
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={usersList} />
+    </Fragment>
   );
 }
 
