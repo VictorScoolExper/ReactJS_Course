@@ -16,7 +16,16 @@ For example:
 SEMANTICALLY and from a "clean HTML structure" perspective, having this nested modal isn't ideal. It is an 
 OVERLAY TO THE ENTIRE PAGE after all (that's similiar for side-drawers, other dialogs etc.)
 
+Understanding Refs:
+lets us access dom components.
+
+In React there exist CONTROLLED OR UNCONTROLLED components. The uncontrolled are reactjs driven components while controlled are 
+thos components where we use ref to access the dom directly
+
 files affected:
 - Helpers/Wrapper.js
+- Users/AddUser.js
+- UI/ErrorModal.js
+- public/index.html
 - Users/AddUser.js
 
