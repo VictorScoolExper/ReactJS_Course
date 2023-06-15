@@ -1,5 +1,0 @@
-What are CUSTOM HOOKS?
-They are just regular function with stateful logic.
-In short terms:
-- Outsource stateful logic into re-usable functions
-- Unlike regular function, custom hooks can use other React hooks and React state.
